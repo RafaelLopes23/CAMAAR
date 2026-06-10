@@ -28,6 +28,11 @@ Durante esta sprint, nosso foco foi a issue **#100 - Cadastrar usuários do sist
 - **Rafael Lopes Cordeiro:** Responsável por elaborar e implementar o cenário de "Importação de Dados do SIGAA".
 - **Rebeca de Souza Coutinho:** Responsável por elaborar e implementar o cenário de "Ativação e Definição de Senha".
 
+## Testes de Aceitação BDD (Cucumber)
+As features foram descritas e implementadas utilizando a sintaxe Gherkin (Cucumber) abordando os caminhos principal e alternativo de cada funcionalidade. Todos os testes passam com sucesso, com a seguinte cobertura:
+- **Importação de Dados:** Valida a importação de CSVs e exibe alertas para extensões não suportadas.
+- **Definição de Senha:** Verifica tamanho mínimo de senha e ativa o cadastro do usuário.
+
 ## Política de Branching
 A equipe adotou o **GitHub Flow** como estratégia de versionamento para o projeto.
 - A branch `main` sempre contém o código em estado de produção/estável.

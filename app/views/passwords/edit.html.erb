@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+<%= form_with url: password_path(user_id: @user.id), method: :patch, local: true do |f| %>
+  <%= f.label :password, "Nova Senha" %>
+  <%= f.password_field :password %>
+  
+  <%= f.label :password_confirmation, "Confirmar Senha" %>
+  <%= f.password_field :password_confirmation %>
+  
+  <%= f.submit "Salvar e Efetivar Cadastro" %>
+<% end %>

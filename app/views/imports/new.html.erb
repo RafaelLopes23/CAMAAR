@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+<%= form_with url: imports_path, multipart: true, local: true do |f| %>
+  <%= f.label :file, "Arquivo" %>
+  <%= f.file_field :file %>
+  <%= f.submit "Importar" %>
+<% end %>

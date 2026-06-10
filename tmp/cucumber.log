@@ -1,0 +1,75 @@
+Using the default profile...
+# language: pt
+Funcionalidade: Definição de senha de usuários pré-cadastrados
+  Como um Participante (Aluno/Professor)
+  Eu quero definir minha senha de acesso
+  A fim de efetivar meu cadastro para acessar o sistema CAMAAR
+
+  Cenário: Definição de senha com sucesso (Caminho Feliz)           # features/definicao_senha.feature:8
+    Dado que eu sou um usuário pré-cadastrado via importação        # features/step_definitions/steps.rb:49
+    E eu acesso o link recebido por email para "Definição de Senha" # features/step_definitions/steps.rb:53
+    Quando eu preencho o campo "Nova Senha" com "SenhaSegura123"    # features/step_definitions/steps.rb:57
+    E eu preencho o campo "Confirmar Senha" com "SenhaSegura123"    # features/step_definitions/steps.rb:57
+    E clico no botão "Salvar e Efetivar Cadastro"                   # features/step_definitions/steps.rb:61
+    Então o meu cadastro de usuário é ativado no sistema CAMAAR     # features/step_definitions/steps.rb:65
+      undefined method 'expect' for #<Cucumber::Rails::World:0x000072108aadca48> (NoMethodError)
+      ./features/step_definitions/steps.rb:67:in `"o meu cadastro de usuário é ativado no sistema CAMAAR"'
+      features/definicao_senha.feature:14:in `o meu cadastro de usuário é ativado no sistema CAMAAR'
+    E eu sou redirecionado para a tela de Login                     # features/step_definitions/steps.rb:70
+    E o sistema exibe a mensagem "Cadastro ativado com sucesso"     # features/step_definitions/steps.rb:30
+
+  Cenário: Definição de senha com tamanho insuficiente (Caminho Triste)               # features/definicao_senha.feature:18
+    Dado que eu sou um usuário pré-cadastrado via importação                          # features/step_definitions/steps.rb:49
+    E eu acesso o link recebido por email para "Definição de Senha"                   # features/step_definitions/steps.rb:53
+    Quando eu preencho o campo "Nova Senha" com "12345"                               # features/step_definitions/steps.rb:57
+    E eu preencho o campo "Confirmar Senha" com "12345"                               # features/step_definitions/steps.rb:57
+    E clico no botão "Salvar e Efetivar Cadastro"                                     # features/step_definitions/steps.rb:61
+    Então o meu cadastro de usuário não é ativado                                     # features/step_definitions/steps.rb:74
+      undefined method 'expect' for #<Cucumber::Rails::World:0x000072108a6d0aa8> (NoMethodError)
+      ./features/step_definitions/steps.rb:76:in `"o meu cadastro de usuário não é ativado"'
+      features/definicao_senha.feature:24:in `o meu cadastro de usuário não é ativado'
+    E o sistema exibe a mensagem de erro "A senha deve conter no mínimo 8 caracteres" # features/step_definitions/steps.rb:45
+
+# language: pt
+Funcionalidade: Importar dados de usuários do SIGAA
+  Como um Administrador
+  Eu quero cadastrar participantes de turmas do SIGAA ao importar dados de usuários novos para o sistema
+  A fim de pré-cadastrá-los para que eles acessem o sistema CAMAAR
+
+  Cenário: Importação de dados com sucesso (Caminho Feliz)                                      # features/importacao_sigaa.feature:8
+    Dado que eu estou logado como "Administrador"                                               # features/step_definitions/steps.rb:1
+    E eu acesso a página de "Importação de Participantes"                                       # features/step_definitions/steps.rb:9
+    Quando eu envio um arquivo válido com os dados dos novos usuários                           # features/step_definitions/steps.rb:15
+      cannot load such file -- csv (LoadError)
+      ./features/step_definitions/steps.rb:16:in `"eu envio um arquivo válido com os dados dos novos usuários"'
+      features/importacao_sigaa.feature:11:in `eu envio um arquivo válido com os dados dos novos usuários'
+    Então o sistema deve criar um pré-cadastro para os usuários                                 # features/step_definitions/steps.rb:22
+    E deve enviar um email com um link de definição de senha para os novos usuários cadastrados # features/step_definitions/steps.rb:26
+    E o sistema exibe a mensagem "Participantes importados com sucesso"                         # features/step_definitions/steps.rb:30
+
+  Cenário: Importação de arquivo com formato inválido (Caminho Triste)      # features/importacao_sigaa.feature:16
+    Dado que eu estou logado como "Administrador"                           # features/step_definitions/steps.rb:1
+    E eu acesso a página de "Importação de Participantes"                   # features/step_definitions/steps.rb:9
+    Quando eu envio um arquivo em formato não suportado (ex: .png)          # features/importacao_sigaa.feature:19
+      Undefined step: "eu envio um arquivo em formato não suportado (ex: .png)" (Cucumber::Core::Test::Result::Undefined)
+      features/importacao_sigaa.feature:19:in `eu envio um arquivo em formato não suportado (ex: .png)'
+    Então o sistema não deve importar nenhum dado                           # features/step_definitions/steps.rb:40
+    E o sistema exibe a mensagem de erro "Formato de arquivo não suportado" # features/step_definitions/steps.rb:45
+
+Failing Scenarios:
+cucumber features/definicao_senha.feature:8 # Cenário: Definição de senha com sucesso (Caminho Feliz)
+cucumber features/definicao_senha.feature:18 # Cenário: Definição de senha com tamanho insuficiente (Caminho Triste)
+cucumber features/importacao_sigaa.feature:8 # Cenário: Importação de dados com sucesso (Caminho Feliz)
+Undefined Scenarios:
+cucumber features/importacao_sigaa.feature:16 # Cenário: Importação de arquivo com formato inválido (Caminho Triste)
+
+4 scenarios (3 failed, 1 undefined)
+26 steps (3 failed, 8 skipped, 1 undefined, 14 passed)
+0m0.216s
+
+You can implement step definitions for undefined steps with these snippets:
+
+Quando('eu envio um arquivo em formato não suportado \(ex: .png)') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
