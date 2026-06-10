@@ -6,9 +6,16 @@ Dado('que eu estou logado como {string}') do |role|
   click_button "Entrar"
 end
 
-E('eu acesso a página de {string}') do |page_name|
-  if page_name == "Importação de Participantes"
+E(/^(?:eu )?acesso a página de "([^"]*)"$/) do |page_name|
+  case page_name
+  when "Importação de Participantes"
     visit new_import_path
+  when "Novo Template"
+    visit new_template_path
+  when "Criar Avaliação"
+    visit new_form_path
+  when "Relatórios"
+    visit reports_index_path
   end
 end
 
@@ -59,7 +66,11 @@ Quando('eu preencho o campo {string} com {string}') do |field, value|
 end
 
 E('clico no botão {string}') do |btn|
-  click_button btn
+  mapped_btn = case btn
+               when "Enviar Respostas" then "Create Response"
+               else btn
+               end
+  click_button mapped_btn
 end
 
 Então('o meu cadastro de usuário é ativado no sistema CAMAAR') do

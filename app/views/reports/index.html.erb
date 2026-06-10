@@ -1,2 +1,18 @@
-<h1>Reports#index</h1>
-<p>Find me in app/views/reports/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+<h1>Relatórios</h1>
+
+<%= form_with url: reports_index_path, method: :get, local: true do |f| %>
+  <%= f.label :turma, "Turma" %>
+  <%= f.select :turma, ["Turma de Engenharia de Software", "Turma de Algoritmos"], prompt: "Selecione" %>
+  <%= f.submit "Gerar" %>
+<% end %>
+
+<% if @responses %>
+  <h2>Relatório</h2>
+  <% @responses.each do |r| %>
+    <p><%= r.content %></p>
+  <% end %>
+  <%= link_to "Exportar PDF", "#" %>
+<% end %>

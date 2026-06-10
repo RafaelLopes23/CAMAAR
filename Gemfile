@@ -67,3 +67,5 @@ gem "database_cleaner", "~> 2.1", groups: [:development, :test]
 
 gem "csv", "~> 3.3", groups: [:test, :development]
 gem "rspec-expectations", "~> 3.13", groups: [:test, :development]
+
+gem "rspec-rails", "~> 8.0", groups: [:development, :test]

@@ -1,12 +1,12 @@
 <div id="<%= dom_id response %>">
   <p>
-    <strong>Form:</strong>
-    <%= response.form_id %>
+    <strong>Formulário:</strong>
+    <%= response.form&.title %>
   </p>
 
   <p>
-    <strong>User:</strong>
-    <%= response.user_id %>
+    <strong>Usuário:</strong>
+    <%= response.user&.name %>
   </p>
 
   <p>

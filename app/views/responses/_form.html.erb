@@ -12,14 +12,10 @@
   <% end %>
 
   <div>
-    <%= form.label :form_id, style: "display: block" %>
-    <%= form.text_field :form_id %>
+    <%= form.label :form_id, "Formulário", style: "display: block" %>
+    <%= form.collection_select :form_id, ::Form.all, :id, :title, prompt: "Selecione o Formulário" %>
   </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
+  <%= form.hidden_field :user_id, value: form.object.user_id || ::User.first&.id || ::User.create!(name: "Participante", email: "part@example.com").id %>
 
   <div>
     <%= form.label :content, style: "display: block" %>
