@@ -16,17 +16,34 @@ O projeto CAMAAR é um sistema desenvolvido em Ruby on Rails para auxiliar no ge
 - **Product Owner:** Rebeca de Souza Coutinho
 
 ## Funcionalidades e Regras de Negócio
-Durante esta sprint, nosso foco foi a issue **#100 - Cadastrar usuários do sistema**. O fluxo principal consiste em um Administrador importar os dados (alunos e professores) e o sistema gerenciar o cadastro. As funcionalidades extraídas para o grupo foram:
-
-1. **Importação de Dados do SIGAA (Administrador)**
-   - *Regra de Negócio:* O Administrador deve submeter um arquivo válido contendo a lista de participantes. O sistema valida se o usuário já existe e realiza um "pré-cadastro". Um email é gerado contendo o link para a definição de senha.
-
-2. **Ativação e Definição de Senha (Participante)**
-   - *Regra de Negócio:* O usuário importado só terá o acesso garantido e o cadastro efetivado no CAMAAR quando definir sua senha inicial, que deve possuir pelo menos 8 caracteres por motivos de segurança.
+Durante esta sprint, nosso foco foi a descrição BDD das seguintes funcionalidades principais do MVP (Produto Mínimo Viável):
+- Gerenciamento de Templates (Criação, Edição, Deleção e Visualização)
+- Formulários de Avaliação (Criação, Visualização e Resposta)
+- Relatórios Gerenciais do Administrador
+- Autenticação e Login
 
 ## Divisão de Responsabilidades
-- **Rafael Lopes Cordeiro:** Responsável por elaborar e implementar o cenário de "Importação de Dados do SIGAA".
-- **Rebeca de Souza Coutinho:** Responsável por elaborar e implementar o cenário de "Ativação e Definição de Senha".
+- **Rafael Lopes Cordeiro:** Responsável por elaborar e descrever os cenários BDD das seguintes funcionalidades:
+  - Criar formulário de avaliação
+  - Criar template de formulário
+  - Gerar relatório do administrador
+  - Responder formulário
+- **Rebeca de Souza Coutinho:** Responsável por elaborar e descrever os cenários BDD das seguintes funcionalidades:
+  - Edição e deleção de templates
+  - Visualização dos templates criados
+  - Visualização de formulários para responder
+  - Sistema de Login
+
+## Descrição das Features BDD (Cucumber)
+As funcionalidades foram transcritas para a sintaxe Gherkin (Cucumber), abrangendo os caminhos principal e alternativo de todas as issues do MVP:
+- **Sistema de Login (`login.feature`):** Valida a autenticação do usuário e tratamento de credenciais inválidas.
+- **Criar Template (`criar_template.feature`):** Valida a criação de um novo template e rejeição caso o nome fique em branco.
+- **Criar Formulário (`criar_formulario.feature`):** Valida a disponibilização de uma avaliação para a turma ou falha ao não vincular template.
+- **Visualização de Templates (`visualizacao_templates.feature`):** Valida a listagem de templates para o administrador ou o aviso quando não houver.
+- **Edição e Deleção de Templates (`edicao_delecao_templates.feature`):** Valida a atualização de um template e impede exclusão se houver formulários atrelados.
+- **Visualização de Formulários (`visualizacao_formularios.feature`):** Valida a exibição de avaliações pendentes para o participante.
+- **Responder Formulário (`responder_formulario.feature`):** Valida o envio com todas as respostas e bloqueia caso campos obrigatórios faltem.
+- **Gerar Relatório (`gerar_relatorio.feature`):** Valida a consolidação de respostas em relatórios para turmas ou acusa a falta de dados suficientes.
 
 ## Testes de Aceitação BDD (Cucumber)
 As features foram descritas e implementadas utilizando a sintaxe Gherkin (Cucumber) abordando os caminhos principal e alternativo de cada funcionalidade. Todos os testes passam com sucesso, com a seguinte cobertura:
