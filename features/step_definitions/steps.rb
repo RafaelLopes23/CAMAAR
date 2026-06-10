@@ -1,9 +1,20 @@
 Dado('que eu estou logado como {string}') do |role|
-  @user = User.create!(name: "Admin", email: "admin@example.com", role: role, password_digest: "password")
+  @user = User.create!(name: "Admin", email: "admin@example.com", role: role, password: "password", password_confirmation: "password")
   visit new_session_path
   fill_in "Email", with: "admin@example.com"
   fill_in "Senha", with: "password"
   click_button "Entrar"
+end
+
+Dado('que eu tenho um cadastro ativo no sistema') do
+  @user = User.create!(
+    name: "Test User",
+    email: "usuario@example.com",
+    role: "Participante",
+    status: "ativo",
+    password: "SenhaSegura123",
+    password_confirmation: "SenhaSegura123"
+  )
 end
 
 E(/^(?:eu )?acesso a página de "([^"]*)"$/) do |page_name|
@@ -16,6 +27,8 @@ E(/^(?:eu )?acesso a página de "([^"]*)"$/) do |page_name|
     visit new_form_path
   when "Relatórios"
     visit reports_index_path
+  when "Login"
+    visit new_session_path
   end
 end
 
@@ -85,4 +98,13 @@ end
 Então('o meu cadastro de usuário não é ativado') do
   @user.reload
   expect(@user.status).to eq("pre-cadastrado")
+end
+
+Então('eu devo ser redirecionado para a página inicial do meu perfil') do
+  expect(current_path).to eq(new_import_path)
+end
+
+Então('eu não devo ser autenticado') do
+  expect(page).to have_current_path(sessions_path)
+  expect(page).to have_content("Email ou senha inválidos")
 end
