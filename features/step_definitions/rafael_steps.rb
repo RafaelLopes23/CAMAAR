@@ -39,10 +39,6 @@ Então('o sistema não deve salvar o template') do
   expect(Template.count).to eq(0)
 end
 
-Dado('existe um template chamado {string}') do |name|
-  @template = Template.create!(name: name, description: "Desc")
-end
-
 Quando('seleciono o template {string}') do |name|
   select name, from: "Template"
 end

@@ -38,7 +38,7 @@ class TemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @template.update(template_params)
-        format.html { redirect_to @template, notice: "Template was successfully updated.", status: :see_other }
+        format.html { redirect_to @template, notice: "Template atualizado com sucesso", status: :see_other }
         format.json { render :show, status: :ok, location: @template }
       else
         format.html { render :edit, status: :unprocessable_content }
@@ -49,11 +49,17 @@ class TemplatesController < ApplicationController
 
   # DELETE /templates/1 or /templates/1.json
   def destroy
-    @template.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to templates_path, notice: "Template was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
+    if @template.forms.any?
+      respond_to do |format|
+        format.html { redirect_to templates_path, alert: "Não é possível excluir um template que já possui formulários vinculados", status: :see_other }
+        format.json { render json: { error: "Template has associated forms" }, status: :unprocessable_entity }
+      end
+    else
+      @template.destroy!
+      respond_to do |format|
+        format.html { redirect_to templates_path, notice: "Template excluído com sucesso", status: :see_other }
+        format.json { head :no_content }
+      end
     end
   end
 

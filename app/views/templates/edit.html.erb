@@ -1,12 +1,15 @@
-<% content_for :title, "Editing template" %>
+<% content_for :title, "Editar Template" %>
 
-<h1>Editing template</h1>
+<div class="container mx-auto p-6">
+  <div class="max-w-2xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Editar Template</h1>
 
-<%= render "form", template: @template %>
+    <div class="bg-white rounded-lg shadow-md p-8">
+      <%= render "form", template: @template %>
+    </div>
 
-<br>
-
-<div>
-  <%= link_to "Show this template", @template %> |
-  <%= link_to "Back to templates", templates_path %>
+    <div class="mt-4 text-center">
+      <%= link_to "Voltar para templates", templates_path, class: "text-blue-500 hover:text-blue-700 underline" %>
+    </div>
+  </div>
 </div>
