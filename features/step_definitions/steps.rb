@@ -31,6 +31,8 @@ E(/^(?:eu )?acesso a página de "([^"]*)"$/) do |page_name|
     visit new_session_path
   when "Meus Templates"
     visit templates_path
+  when "Meus Formulários"
+    visit forms_path
   end
 end
 
@@ -146,6 +148,39 @@ end
 # Steps para edição e deleção de templates
 Dado('existe um template chamado {string}') do |name|
   @template = Template.create!(name: name, description: "Template de teste")
+end
+
+# Steps para visualização de formulários (participante)
+Dado('existem formulários pendentes atribuídos a mim') do
+  t1 = Template.create!(name: "T01", description: "D")
+  t2 = Template.create!(name: "T02", description: "D")
+  @forms = [
+    Form.create!(title: "Form A", template: t1),
+    Form.create!(title: "Form B", template: t2)
+  ]
+end
+
+Dado('não existem formulários pendentes para mim') do
+  # Criar um formulário e marcar como respondido pelo usuário atual
+  tpl = Template.create!(name: "T-Respondido", description: "D")
+  form = Form.create!(title: "Form Respondido", template: tpl)
+  user = @user || User.first || User.create!(name: "U", email: "u@example.com", role: "Participante", password: "password", password_confirmation: "password")
+  Response.create!(form: form, user: user, content: "Resposta")
+end
+
+Então('eu devo ver uma lista com os formulários não respondidos') do
+  expect(page).to have_css('table')
+  expect(page).to have_content('Responder')
+end
+
+Então('cada item da lista deve ter um botão "Responder"') do
+  @forms.each do |f|
+    expect(page).to have_link('Responder', href: new_response_path(form_id: f.id))
+  end
+end
+
+Então('a lista de formulários deve estar vazia') do
+  expect(page).to have_content('Você não possui formulários pendentes')
 end
 
 Dado('existe um template chamado {string} que já foi usado em formulários') do |name|

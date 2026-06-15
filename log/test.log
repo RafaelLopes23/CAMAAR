@@ -2337,3 +2337,296 @@ Processing by TemplatesController#index as HTML
   Rendered layout layouts/application.html.erb (Duration: 19.2ms | GC: 0.0ms)
 Completed 200 OK in 26ms (Views: 22.1ms | ActiveRecord: 0.4ms (5 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (9.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "role", "password_digest", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Admin"], ["email", "[FILTERED]"], ["role", "Participante"], ["password_digest", "[FILTERED]"], ["status", nil], ["created_at", "2026-06-15 23:32:29.323571"], ["updated_at", "2026-06-15 23:32:29.323571"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/sessions/new" for 127.0.0.1 at 2026-06-15 20:32:29 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 42.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 264.9ms | GC: 0.0ms)
+Completed 200 OK in 695ms (Views: 329.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started POST "/sessions" for 127.0.0.1 at 2026-06-15 20:32:30 -0300
+Processing by SessionsController#create as HTML
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Entrar"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://www.example.com/imports/new
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/imports/new" for 127.0.0.1 at 2026-06-15 20:32:30 -0300
+Processing by ImportsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering imports/new.html.erb within layouts/application
+  Rendered imports/new.html.erb within layouts/application (Duration: 16.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 18.4ms | GC: 0.0ms)
+Completed 200 OK in 105ms (Views: 27.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (1.9ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T01"], ["description", "D"], ["created_at", "2026-06-15 23:32:31.187542"], ["updated_at", "2026-06-15 23:32:31.187542"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (1.8ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T02"], ["description", "D"], ["created_at", "2026-06-15 23:32:31.194620"], ["updated_at", "2026-06-15 23:32:31.194620"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (2.0ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form A"], ["template_id", 1], ["created_at", "2026-06-15 23:32:31.336737"], ["updated_at", "2026-06-15 23:32:31.336737"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (3.6ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form B"], ["template_id", 2], ["created_at", "2026-06-15 23:32:31.345880"], ["updated_at", "2026-06-15 23:32:31.345880"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/forms" for 127.0.0.1 at 2026-06-15 20:32:31 -0300
+Processing by FormsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering forms/index.html.erb within layouts/application
+  Rendered forms/index.html.erb within layouts/application (Duration: 58.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 60.6ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 225ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (7.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "role", "password_digest", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Admin"], ["email", "[FILTERED]"], ["role", "Participante"], ["password_digest", "[FILTERED]"], ["status", nil], ["created_at", "2026-06-15 23:32:31.689666"], ["updated_at", "2026-06-15 23:32:31.689666"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/sessions/new" for 127.0.0.1 at 2026-06-15 20:32:31 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 4.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.6ms | GC: 0.0ms)
+Completed 200 OK in 12ms (Views: 11.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started POST "/sessions" for 127.0.0.1 at 2026-06-15 20:32:31 -0300
+Processing by SessionsController#create as HTML
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Entrar"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://www.example.com/imports/new
+Completed 302 Found in 5ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/imports/new" for 127.0.0.1 at 2026-06-15 20:32:31 -0300
+Processing by ImportsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering imports/new.html.erb within layouts/application
+  Rendered imports/new.html.erb within layouts/application (Duration: 1.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | GC: 0.0ms)
+Completed 200 OK in 23ms (Views: 11.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (22.5ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T-Respondido"], ["description", "D"], ["created_at", "2026-06-15 23:32:31.812276"], ["updated_at", "2026-06-15 23:32:31.812276"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (3.5ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form Respondido"], ["template_id", 1], ["created_at", "2026-06-15 23:32:31.865585"], ["updated_at", "2026-06-15 23:32:31.865585"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mResponse Create (2.9ms)[0m  [1m[32mINSERT INTO "responses" ("form_id", "user_id", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["form_id", 1], ["user_id", 1], ["content", "Resposta"], ["created_at", "2026-06-15 23:32:31.928288"], ["updated_at", "2026-06-15 23:32:31.928288"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/forms" for 127.0.0.1 at 2026-06-15 20:32:31 -0300
+Processing by FormsController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering forms/index.html.erb within layouts/application
+  Rendered forms/index.html.erb within layouts/application (Duration: 21.3ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 23.9ms | GC: 0.3ms)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 0.3ms)
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (17.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "role", "password_digest", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Admin"], ["email", "[FILTERED]"], ["role", "Participante"], ["password_digest", "[FILTERED]"], ["status", nil], ["created_at", "2026-06-15 23:39:15.527159"], ["updated_at", "2026-06-15 23:39:15.527159"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/sessions/new" for 127.0.0.1 at 2026-06-15 20:39:15 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 34.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 228.7ms | GC: 0.0ms)
+Completed 200 OK in 617ms (Views: 295.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started POST "/sessions" for 127.0.0.1 at 2026-06-15 20:39:16 -0300
+Processing by SessionsController#create as HTML
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Entrar"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://www.example.com/imports/new
+Completed 302 Found in 7ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/imports/new" for 127.0.0.1 at 2026-06-15 20:39:16 -0300
+Processing by ImportsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering imports/new.html.erb within layouts/application
+  Rendered imports/new.html.erb within layouts/application (Duration: 15.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 18.2ms | GC: 0.0ms)
+Completed 200 OK in 98ms (Views: 25.7ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (2.1ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T01"], ["description", "D"], ["created_at", "2026-06-15 23:39:17.140124"], ["updated_at", "2026-06-15 23:39:17.140124"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (1.4ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T02"], ["description", "D"], ["created_at", "2026-06-15 23:39:17.146514"], ["updated_at", "2026-06-15 23:39:17.146514"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (1.4ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form A"], ["template_id", 1], ["created_at", "2026-06-15 23:39:17.274487"], ["updated_at", "2026-06-15 23:39:17.274487"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (2.3ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form B"], ["template_id", 2], ["created_at", "2026-06-15 23:39:17.281737"], ["updated_at", "2026-06-15 23:39:17.281737"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/forms" for 127.0.0.1 at 2026-06-15 20:39:17 -0300
+Processing by FormsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering forms/index.html.erb within layouts/application
+  [1m[36mForm Load (0.1ms)[0m  [1m[34mSELECT "forms".* FROM "forms"[0m
+  [1m[36mResponse Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."form_id" = ? AND "responses"."user_id" = ? LIMIT ?[0m  [["form_id", 1], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mResponse Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."form_id" = ? AND "responses"."user_id" = ? LIMIT ?[0m  [["form_id", 2], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mTemplate Load (0.1ms)[0m  [1m[34mSELECT "templates".* FROM "templates" WHERE "templates"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTemplate Load (0.3ms)[0m  [1m[34mSELECT "templates".* FROM "templates" WHERE "templates"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered forms/index.html.erb within layouts/application (Duration: 99.6ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 105.1ms | GC: 0.2ms)
+Completed 200 OK in 242ms (Views: 115.7ms | ActiveRecord: 1.1ms (6 queries, 0 cached) | GC: 0.2ms)
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (8.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "role", "password_digest", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Admin"], ["email", "[FILTERED]"], ["role", "Participante"], ["password_digest", "[FILTERED]"], ["status", nil], ["created_at", "2026-06-15 23:39:17.640326"], ["updated_at", "2026-06-15 23:39:17.640326"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/sessions/new" for 127.0.0.1 at 2026-06-15 20:39:17 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.1ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.7ms | GC: 0.3ms)
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+Started POST "/sessions" for 127.0.0.1 at 2026-06-15 20:39:17 -0300
+Processing by SessionsController#create as HTML
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Entrar"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://www.example.com/imports/new
+Completed 302 Found in 8ms (ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/imports/new" for 127.0.0.1 at 2026-06-15 20:39:17 -0300
+Processing by ImportsController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering imports/new.html.erb within layouts/application
+  Rendered imports/new.html.erb within layouts/application (Duration: 1.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 11ms (Views: 8.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.5ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (2.1ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T-Respondido"], ["description", "D"], ["created_at", "2026-06-15 23:39:17.770877"], ["updated_at", "2026-06-15 23:39:17.770877"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (1.9ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form Respondido"], ["template_id", 1], ["created_at", "2026-06-15 23:39:17.783151"], ["updated_at", "2026-06-15 23:39:17.783151"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mResponse Create (1.9ms)[0m  [1m[32mINSERT INTO "responses" ("form_id", "user_id", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["form_id", 1], ["user_id", 1], ["content", "Resposta"], ["created_at", "2026-06-15 23:39:17.801556"], ["updated_at", "2026-06-15 23:39:17.801556"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/forms" for 127.0.0.1 at 2026-06-15 20:39:17 -0300
+Processing by FormsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering forms/index.html.erb within layouts/application
+  [1m[36mForm Load (0.1ms)[0m  [1m[34mSELECT "forms".* FROM "forms"[0m
+  [1m[36mResponse Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."form_id" = ? AND "responses"."user_id" = ? LIMIT ?[0m  [["form_id", 1], ["user_id", 1], ["LIMIT", 1]]
+  Rendered forms/index.html.erb within layouts/application (Duration: 5.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.5ms | GC: 0.0ms)
+Completed 200 OK in 14ms (Views: 9.5ms | ActiveRecord: 0.7ms (3 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (9.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "role", "password_digest", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Admin"], ["email", "[FILTERED]"], ["role", "Participante"], ["password_digest", "[FILTERED]"], ["status", nil], ["created_at", "2026-06-15 23:41:55.567882"], ["updated_at", "2026-06-15 23:41:55.567882"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/sessions/new" for 127.0.0.1 at 2026-06-15 20:41:55 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 33.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 232.1ms | GC: 0.0ms)
+Completed 200 OK in 637ms (Views: 295.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started POST "/sessions" for 127.0.0.1 at 2026-06-15 20:41:57 -0300
+Processing by SessionsController#create as HTML
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Entrar"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://www.example.com/imports/new
+Completed 302 Found in 6ms (ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/imports/new" for 127.0.0.1 at 2026-06-15 20:41:57 -0300
+Processing by ImportsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering imports/new.html.erb within layouts/application
+  Rendered imports/new.html.erb within layouts/application (Duration: 14.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.9ms | GC: 0.0ms)
+Completed 200 OK in 94ms (Views: 25.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (2.0ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T01"], ["description", "D"], ["created_at", "2026-06-15 23:41:57.282769"], ["updated_at", "2026-06-15 23:41:57.282769"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (2.2ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T02"], ["description", "D"], ["created_at", "2026-06-15 23:41:57.292405"], ["updated_at", "2026-06-15 23:41:57.292405"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (2.3ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form A"], ["template_id", 1], ["created_at", "2026-06-15 23:41:57.508449"], ["updated_at", "2026-06-15 23:41:57.508449"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (2.7ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form B"], ["template_id", 2], ["created_at", "2026-06-15 23:41:57.519423"], ["updated_at", "2026-06-15 23:41:57.519423"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/forms" for 127.0.0.1 at 2026-06-15 20:41:57 -0300
+Processing by FormsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering forms/index.html.erb within layouts/application
+  [1m[36mForm Load (0.1ms)[0m  [1m[34mSELECT "forms".* FROM "forms"[0m
+  [1m[36mResponse Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."form_id" = ? AND "responses"."user_id" = ? LIMIT ?[0m  [["form_id", 1], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mResponse Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."form_id" = ? AND "responses"."user_id" = ? LIMIT ?[0m  [["form_id", 2], ["user_id", 1], ["LIMIT", 1]]
+  [1m[36mTemplate Load (0.6ms)[0m  [1m[34mSELECT "templates".* FROM "templates" WHERE "templates"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTemplate Load (0.3ms)[0m  [1m[34mSELECT "templates".* FROM "templates" WHERE "templates"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered forms/index.html.erb within layouts/application (Duration: 121.3ms | GC: 0.9ms)
+  Rendered layout layouts/application.html.erb (Duration: 127.1ms | GC: 0.9ms)
+Completed 200 OK in 288ms (Views: 138.4ms | ActiveRecord: 1.9ms (6 queries, 0 cached) | GC: 0.9ms)
+  [1m[36mTRANSACTION (5.2ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (11.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "role", "password_digest", "status", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Admin"], ["email", "[FILTERED]"], ["role", "Participante"], ["password_digest", "[FILTERED]"], ["status", nil], ["created_at", "2026-06-15 23:41:58.004204"], ["updated_at", "2026-06-15 23:41:58.004204"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/sessions/new" for 127.0.0.1 at 2026-06-15 20:41:58 -0300
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.6ms | GC: 0.0ms)
+Completed 200 OK in 9ms (Views: 8.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+Started POST "/sessions" for 127.0.0.1 at 2026-06-15 20:41:58 -0300
+Processing by SessionsController#create as HTML
+  Parameters: {"email" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Entrar"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Redirected to http://www.example.com/imports/new
+Completed 302 Found in 8ms (ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/imports/new" for 127.0.0.1 at 2026-06-15 20:41:58 -0300
+Processing by ImportsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering imports/new.html.erb within layouts/application
+  Rendered imports/new.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.0ms | GC: 0.0ms)
+Completed 200 OK in 11ms (Views: 7.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTemplate Create (2.4ms)[0m  [1m[32mINSERT INTO "templates" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["name", "T-Respondido"], ["description", "D"], ["created_at", "2026-06-15 23:41:58.133713"], ["updated_at", "2026-06-15 23:41:58.133713"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mForm Create (1.7ms)[0m  [1m[32mINSERT INTO "forms" ("title", "template_id", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["title", "Form Respondido"], ["template_id", 1], ["created_at", "2026-06-15 23:41:58.150330"], ["updated_at", "2026-06-15 23:41:58.150330"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mResponse Create (3.0ms)[0m  [1m[32mINSERT INTO "responses" ("form_id", "user_id", "content", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["form_id", 1], ["user_id", 1], ["content", "Resposta"], ["created_at", "2026-06-15 23:41:58.178882"], ["updated_at", "2026-06-15 23:41:58.178882"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/forms" for 127.0.0.1 at 2026-06-15 20:41:58 -0300
+Processing by FormsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering forms/index.html.erb within layouts/application
+  [1m[36mForm Load (0.1ms)[0m  [1m[34mSELECT "forms".* FROM "forms"[0m
+  [1m[36mResponse Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM "responses" WHERE "responses"."form_id" = ? AND "responses"."user_id" = ? LIMIT ?[0m  [["form_id", 1], ["user_id", 1], ["LIMIT", 1]]
+  Rendered forms/index.html.erb within layouts/application (Duration: 8.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | GC: 0.0ms)
+Completed 200 OK in 19ms (Views: 13.1ms | ActiveRecord: 1.6ms (3 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
