@@ -1,2 +1,43 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore all environment files.
+.env*
+
+# Ignore application configuration
 config/master.key
 config/credentials.yml.enc
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+
+# Ignore assets
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+/.yarn-integrity
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Sqlite3 database
+/db/*.sqlite3
+/db/*.sqlite3-shm
+/db/*.sqlite3-wal
+
+# Pidfiles
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
