@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Response, type: :model do
   let(:template) { Template.create!(name: "Avaliação") }
   let(:form) { Form.create!(title: "Turma", template: template) }
-  let(:user) { User.create!(name: "Aluno", email: "aluno@example.com") }
+  let(:user) { User.create!(name: "Aluno", email: "aluno@example.com", password: "Senha123", password_confirmation: "Senha123") }
 
   it "is valid with content" do
     response = Response.new(form: form, user: user, content: "Minha resposta")
