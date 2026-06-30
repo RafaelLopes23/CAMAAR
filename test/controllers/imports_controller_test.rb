@@ -8,13 +8,13 @@ class ImportsControllerTest < ActionDispatch::IntegrationTest
       User.delete_all
     end
 
-    # Criando o usuário com as chaves exatas do seu enum
+    
     @user = User.create!(
       name: "Rebeca", 
       email: "rebeca@teste.com", 
       status: "pre-cadastrado", 
-      role: "administrador", # <--- Corrigido para bater com o enum
-      password: "secret"     # <--- O has_secure_password cuida do hash e passa na validação
+      role: "administrador", 
+      password: "secret"   
     )
     
     post sessions_url, params: { email: @user.email, password: 'secret' }

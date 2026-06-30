@@ -60,7 +60,7 @@ class ResponsesController < ApplicationController
     params.expect(response: [ :form_id, :user_id, :content ])
   end
 
-  # Centraliza o sucesso e a falha em um único método dinâmico, mudando completamente a AST
+  
   def dispatch_response_result(format, success, action_view, resource, message, success_status)
     if success
       format.html { redirect_to resource, notice: message, status: (success_status == :ok ? :see_other : :found) }

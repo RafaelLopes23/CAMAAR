@@ -59,7 +59,7 @@ class TemplatesController < ApplicationController
     params.expect(template: [ :name, :description ])
   end
 
-  # --- Métodos auxiliares otimizados ---
+ 
 
   def render_create_success(template)
     respond_to do |format|
