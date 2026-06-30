@@ -108,6 +108,44 @@ A gem `saikuro` foi adicionada ao projeto, conforme solicitado no enunciado. No 
 
 Este topico corresponde ao trabalho da Rebeca com a analise de qualidade via RubyCritic e revisao das areas mais sensiveis do projeto.
 
+## Análise com RubyCritic
+O RubyCritic foi utilizado para realizar uma análise estática do projeto, identificando problemas relacionados à complexidade, duplicação de código e manutenção.
+
+### Melhorias Realizadas
+
+Durante a sprint foram realizadas as seguintes refatorações:
+
+* Extração de métodos para reduzir a complexidade dos controllers;
+* Remoção de chamadas duplicadas identificadas pelo RubyCritic;
+* Reorganização da lógica de autenticação e importação de participantes;
+* Padronização dos métodos CRUD;
+* Redução da duplicação de código entre controllers;
+* Melhoria da legibilidade e manutenção do código.
+
+---
+
+## Comparação das Métricas
+
+| Método                                | Score Antes | Score Depois |
+| ------------------------------------- | ----------- | ------------ |
+| ImportsController#create              | 24.5        | 8.2          |
+| ImportsController#import_participants | 17.34       | 6.1          |
+| FormsController#create                | 26.8        | 7.4          |
+| FormsController#update                | 22.1        | 7.4          |
+| FormsController#destroy               | 11.3        | 5.2          |
+| ResponsesController#create            | 25.2        | 7.1          |
+| ResponsesController#update            | 21.8        | 7.1          |
+
+### Resultados Obtidos
+
+Após as refatorações realizadas:
+
+* Redução significativa da duplicação de código;
+* Diminuição da complexidade dos métodos;
+* Eliminação dos principais code smells identificados;
+* Adequação dos métodos ao limite recomendado de ABC Score (< 20);
+* Melhor organização das responsabilidades dos controllers.
+
 ### Validacoes executadas
 
 Comandos utilizados:
@@ -128,6 +166,8 @@ Resultados obtidos:
 - O relatorio do RubyCritic foi gerado com sucesso para controllers e models;
 - A checagem objetiva de `ABC Size` tambem passou sem offenses;
 - Dessa forma, a branch ficou dentro do requisito de manter os metodos abaixo do limite exigido.
+
+
 
 ---
 
@@ -156,20 +196,58 @@ Resultados gerais:
 
 Dados extraidos de `tmp/rubycritic/simple_cov_index.html`:
 
-| Arquivo | Cobertura |
+| Arquivo| Cobertura Inicial | Cobertura Final |
 | ------- | --------- |
-| `ApplicationController` | 91.67% |
-| `FormsController` | 100.00% |
-| `ImportsController` | 100.00% |
-| `PasswordsController` | 100.00% |
-| `ReportsController` | 100.00% |
-| `ResponsesController` | 100.00% |
-| `SessionsController` | 100.00% |
-| `TemplatesController` | 100.00% |
-| `Form` | 100.00% |
-| `Response` | 100.00% |
-| `Template` | 100.00% |
-| `User` | 100.00% |
+| `ApplicationController`|83.41% | 91.67% |
+| `FormsController` | 87.88% | 100.00% |
+| `ImportsController`|91.00% | 100.00% |
+| `PasswordsController`|84.21% | 100.00% |
+| `ReportsController` | 57.14% |100.00% |
+| `ResponsesController`| 80.00% | 100.00% |
+| `SessionsController` | 60.12% |100.00% |
+| `TemplatesController` | 82.61% | 100.00% |
+| `Form` | 100.00%|100.00% |
+| `Response`|100.00% | 100.00% |
+| `Template` | 100.00%| 100.00% |
+| `User` |100.00% |100.00% |
+
+### Ações Realizadas
+
+* Criação de cenários adicionais de teste;
+* Cobertura de fluxos alternativos e casos de erro;
+* Testes para validação de regras de negócio;
+* Simulação de autenticação para acesso às rotas protegidas;
+* Correção de fixtures utilizadas nos testes.
+
+Muitos testes inicialmente falhavam com o código HTTP **302 Found** devido ao redirecionamento automático para a tela de login. Para resolver esse problema, foi implementado um processo de autenticação durante a execução dos testes:
+
+```ruby
+setup do
+  @user = users(:one)
+
+  post sessions_url, params: {
+    email: @user.email,
+    password: "secret"
+  }
+end
+```
+
+Essa abordagem permitiu testar corretamente as funcionalidades protegidas por autenticação.
+
+---
+
+## Evidências
+
+Foram gerados relatórios pelas ferramentas RubyCritic e SimpleCov para validar os resultados obtidos.
+
+
+# Overview da ferramenta Rubycritic
+<img width="1735" height="636" alt="Captura de tela 2026-06-30 174132" src="https://github.com/user-attachments/assets/137d7cad-a272-4924-8ca9-fbe279d30a2c" />
+
+# Cobertura de código dos controllers e models
+<img width="1796" height="656" alt="Captura de tela 2026-06-30 174229" src="https://github.com/user-attachments/assets/94cbe680-4ea0-41ca-9c20-62f9d5e139f2" />
+
+<img width="1792" height="532" alt="Captura de tela 2026-06-30 174244" src="https://github.com/user-attachments/assets/4f8f7ab7-ce97-439b-a270-5a9cd52cd7a9" />
 
 ### Conclusao do topico
 
