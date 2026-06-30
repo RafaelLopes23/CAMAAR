@@ -1,4 +1,4 @@
-# Represents a user's response to a form
+# Modelo que representa a resposta enviada por um usuario para um formulario.
 class Response < ApplicationRecord
   belongs_to :form
   belongs_to :user

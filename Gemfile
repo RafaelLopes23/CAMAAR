@@ -52,8 +52,12 @@ group :development, :test do
 end
 
 group :development do
+  gem "getoptlong", require: false
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "rdoc", require: false
+  gem "rubycritic", require: false
+  gem "saikuro", require: false
 end
 
 group :test do

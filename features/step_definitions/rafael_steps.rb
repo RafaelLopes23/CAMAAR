@@ -9,17 +9,17 @@ Quando('eu deixo o campo "Nome do Template" em branco') do
 end
 
 E('adiciono questões de múltipla escolha e texto') do
-  fill_in "Description", with: "Questões variadas"
+  fill_in_template_description("Questões variadas")
 end
 
 E('adiciono questões de múltipla escolha') do
-  fill_in "Description", with: "Múltipla escolha"
+  fill_in_template_description("Múltipla escolha")
 end
 
 E('clico em {string}') do |btn|
   case btn
   when "Salvar Template"
-    click_button "Create Template"
+    click_button "Salvar"
   when "Disponibilizar Formulário"
     click_button "Create Form"
   when "Enviar Respostas"
@@ -32,11 +32,11 @@ E('clico em {string}') do |btn|
 end
 
 Então('o sistema deve salvar o template no banco de dados') do
-  expect(Template.count).to be >= 1
+  expect(Template.count).to be > (@initial_template_count || 0)
 end
 
 Então('o sistema não deve salvar o template') do
-  expect(Template.count).to eq(0)
+  expect(Template.count).to eq(@initial_template_count || 0)
 end
 
 Quando('seleciono o template {string}') do |name|
@@ -56,7 +56,7 @@ Mas('deixo o campo de "Template" vazio') do
 end
 
 Então('o sistema gera um formulário associado a essa turma') do
-  expect(Form.count).to be >= 1
+  expect(Form.count).to be > (@initial_form_count || 0)
 end
 
 E('notifica os alunos da turma') do
@@ -64,11 +64,12 @@ E('notifica os alunos da turma') do
 end
 
 Então('o sistema não deve gerar o formulário') do
-  expect(Form.count).to eq(0)
+  expect(Form.count).to eq(@initial_form_count || 0)
 end
 
 Dado('eu acesso a página de resposta do formulário {string}') do |turma|
   @form = Form.create!(title: turma, template: Template.first || Template.create!(name: "T", description: "D"))
+  @initial_response_count = Response.count
   visit new_response_path(form_id: @form.id)
 end
 
@@ -78,7 +79,7 @@ Quando('eu preencho todas as questões obrigatórias') do
 end
 
 Então('o sistema deve salvar minhas respostas') do
-  expect(Response.count).to be >= 1
+  expect(Response.count).to be > (@initial_response_count || 0)
 end
 
 E('o status do formulário deve mudar para "Respondido"') do
@@ -90,7 +91,7 @@ Quando('eu deixo uma questão obrigatória em branco') do
 end
 
 Então('o sistema não deve salvar as respostas') do
-  expect(Response.count).to eq(0)
+  expect(Response.count).to eq(@initial_response_count || 0)
 end
 
 E('destaca a questão obrigatória') do
@@ -134,4 +135,12 @@ end
 
 Quando('eu seleciono a {string}') do |turma|
   step %{seleciono a "#{turma}"}
+end
+
+def fill_in_template_description(value)
+  if page.has_field?("Descrição")
+    fill_in "Descrição", with: value
+  else
+    fill_in "template_description", with: value
+  end
 end

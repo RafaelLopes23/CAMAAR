@@ -2,10 +2,7 @@ require "test_helper"
 
 class ResponsesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    
     @form_response = responses(:one)
-
-    
     @user = users(:one)
     post sessions_url, params: { email: @user.email, password: 'secret' }
   end
@@ -29,13 +26,11 @@ class ResponsesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show response" do
-    
     get response_url(@form_response)
     assert_response :success
   end
 
   test "should get edit" do
-   
     get edit_response_url(@form_response)
     assert_response :success
   end
@@ -51,5 +46,19 @@ class ResponsesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to responses_url
+  end
+
+  test "should not create response with invalid params" do
+    assert_no_difference("Response.count") do
+      post responses_url, params: { response: { content: "", form_id: @form_response.form_id, user_id: @form_response.user_id } }
+    end
+
+    assert_response :unprocessable_content
+  end
+
+  test "should not update response with invalid params" do
+    patch response_url(@form_response), params: { response: { content: "", form_id: @form_response.form_id, user_id: @form_response.user_id } }
+
+    assert_response :unprocessable_content
   end
 end

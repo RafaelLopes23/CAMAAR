@@ -1,7 +1,15 @@
 Dado('que eu estou logado como {string}') do |role|
-  @user = User.create!(name: "Admin", email: "admin@example.com", role: role, password: "password", password_confirmation: "password")
+  email = "admin-#{SecureRandom.hex(4)}@example.com"
+  @user = User.create!(
+    name: "Admin",
+    email: email,
+    role: role,
+    status: "ativo",
+    password: "password",
+    password_confirmation: "password"
+  )
   visit new_session_path
-  fill_in "Email", with: "admin@example.com"
+  fill_in "Email", with: email
   fill_in "Senha", with: "password"
   click_button "Entrar"
 end
@@ -22,8 +30,10 @@ E(/^(?:eu )?acesso a página de "([^"]*)"$/) do |page_name|
   when "Importação de Participantes"
     visit new_import_path
   when "Novo Template"
+    @initial_template_count = Template.count
     visit new_template_path
   when "Criar Avaliação"
+    @initial_form_count = Form.count
     visit new_form_path
   when "Relatórios"
     visit reports_index_path
@@ -161,7 +171,11 @@ Dado('existem formulários pendentes atribuídos a mim') do
 end
 
 Dado('não existem formulários pendentes para mim') do
-  # Criar um formulário e marcar como respondido pelo usuário atual
+  Response.delete_all
+  Form.delete_all
+  Template.delete_all
+
+  # Cria um formulario e o marca como respondido para o usuario atual
   tpl = Template.create!(name: "T-Respondido", description: "D")
   form = Form.create!(title: "Form Respondido", template: tpl)
   user = @user || User.first || User.create!(name: "U", email: "u@example.com", role: "Participante", password: "password", password_confirmation: "password")
