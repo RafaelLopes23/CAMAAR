@@ -112,15 +112,17 @@ Este topico corresponde ao trabalho da Rebeca com a analise de qualidade via Rub
 O RubyCritic foi utilizado para realizar uma análise estática do projeto, identificando problemas relacionados à complexidade, duplicação de código e manutenção.
 
 ### Melhorias Realizadas
+Para alcançar a redução drástica no ABC Score e mitigar os *code smells* sem inflar o acoplamento do sistema, aplicamos duas técnicas clássicas de refatoração:
 
-Durante a sprint foram realizadas as seguintes refatorações:
+#### A. Extração de Método (Extract Method) para Tratamento de Erros
+O principal fator de inflação do ABC Score nos métodos `create` e `update`  do Rails era a estrutura ramificada do bloco `respond_to`. Ela gerava chamadas duplicadas para `format.html` e `format.json` tanto no fluxo de sucesso quanto no de falha (o smell *DuplicateMethodCall*).
+* **Ação:** Isolamos o bloco do `else` (responsável pelo retorno de erros e injeção do status HTTP `422 Unprocessable Content`) em métodos privados dedicados, como o `render_form_error`.
+* **Impacto:** Reduziu  as ramificações de controle (*branches*) das ações principais
 
-* Extração de métodos para reduzir a complexidade dos controllers;
-* Remoção de chamadas duplicadas identificadas pelo RubyCritic;
-* Reorganização da lógica de autenticação e importação de participantes;
-* Padronização dos métodos CRUD;
-* Redução da duplicação de código entre controllers;
-* Melhoria da legibilidade e manutenção do código.
+#### B. Isolamento de Lógica de Negócio em Métodos Auxiliares
+No `ImportsController#create`, a ação misturava leitura de IO de arquivos, estruturação de hashes temporários e tratamento direto de mensagens do `ActionMailer::Base.deliveries` de forma linear (o smell *TooManyStatements*).
+* **Ação:** Extraímos toda a rotina de processamento de linhas para o método privado de suporte `import_participants`, limpando o fluxo principal.
+* **Impacto:** O método público `create` passou a responder estritamente pelo fluxo HTTP e controle de guardas de extensão de arquivos (`.csv`), atingindo a responsabilidade única.
 
 ---
 
@@ -139,13 +141,11 @@ Durante a sprint foram realizadas as seguintes refatorações:
 ### Resultados Obtidos
 
 Após as refatorações realizadas:
+* Redução da complexidade geral e eliminação de code smells críticos;
+* Adequação de 100% dos métodos avaliados ao teto recomendado de ABC Score;
+* Melhor organização das responsabilidades dos controllers, facilitando a sustentabilidade do código.
 
-* Redução significativa da duplicação de código;
-* Diminuição da complexidade dos métodos;
-* Eliminação dos principais code smells identificados;
-* Adequação dos métodos ao limite recomendado de ABC Score (< 20);
-* Melhor organização das responsabilidades dos controllers.
-
+---
 ### Validacoes executadas
 
 Comandos utilizados:
@@ -197,13 +197,13 @@ Resultados gerais:
 Dados extraidos de `tmp/rubycritic/simple_cov_index.html`:
 
 | Arquivo| Cobertura Inicial | Cobertura Final |
-| ------- | --------- |
+| ------- | --------- | ----------------------- |
 | `ApplicationController`|83.41% | 91.67% |
 | `FormsController` | 87.88% | 100.00% |
-| `ImportsController`|91.00% | 100.00% |
+| `ImportsController`|91.00% | 92.31% |
 | `PasswordsController`|84.21% | 100.00% |
 | `ReportsController` | 57.14% |100.00% |
-| `ResponsesController`| 80.00% | 100.00% |
+| `ResponsesController`| 80.00% | 93.94% |
 | `SessionsController` | 60.12% |100.00% |
 | `TemplatesController` | 82.61% | 100.00% |
 | `Form` | 100.00%|100.00% |
