@@ -1,12 +1,14 @@
+# Controller responsável por gerenciar o ciclo de vida de Respostas/Avaliações.
+# :reek:InstanceVariableAssumption
 class ResponsesController < ApplicationController
   before_action :set_response, only: %i[ show edit update destroy ]
 
-  # GET /responses or /responses.json
+  # GET /responses
   def index
     @responses = Response.all
   end
 
-  # GET /responses/1 or /responses/1.json
+  # GET /responses/1
   def show
   end
 
@@ -19,35 +21,26 @@ class ResponsesController < ApplicationController
   def edit
   end
 
-  # POST /responses or /responses.json
+  # POST /responses
   def create
     @response = Response.new(response_params)
-
+    saved = @response.save
+    
     respond_to do |format|
-      if @response.save
-        format.html { redirect_to @response, notice: "Avaliação enviada com sucesso" }
-        format.json { render :show, status: :created, location: @response }
-      else
-        format.html { render :new, status: :unprocessable_content }
-        format.json { render json: @response.errors, status: :unprocessable_content }
-      end
+      dispatch_response_result(format, saved, :new, @response, "Avaliação enviada com sucesso", :created)
     end
   end
 
-  # PATCH/PUT /responses/1 or /responses/1.json
+  # PATCH/PUT /responses/1
   def update
+    updated = @response.update(response_params)
+
     respond_to do |format|
-      if @response.update(response_params)
-        format.html { redirect_to @response, notice: "Response was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @response }
-      else
-        format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @response.errors, status: :unprocessable_content }
-      end
+      dispatch_response_result(format, updated, :edit, @response, "Response was successfully updated.", :ok)
     end
   end
 
-  # DELETE /responses/1 or /responses/1.json
+  # DELETE /responses/1
   def destroy
     @response.destroy!
 
@@ -58,13 +51,23 @@ class ResponsesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_response
-      @response = Response.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def response_params
-      params.expect(response: [ :form_id, :user_id, :content ])
+  def set_response
+    @response = Response.find(params[:id])
+  end
+
+  def response_params
+    params.expect(response: [ :form_id, :user_id, :content ])
+  end
+
+  # Centraliza o sucesso e a falha em um único método dinâmico, mudando completamente a AST
+  def dispatch_response_result(format, success, action_view, resource, message, success_status)
+    if success
+      format.html { redirect_to resource, notice: message, status: (success_status == :ok ? :see_other : :found) }
+      format.json { render :show, status: success_status, location: resource }
+    else
+      format.html { render action_view, status: :unprocessable_content }
+      format.json { render json: resource.errors, status: :unprocessable_content }
     end
+  end
 end

@@ -1,4 +1,7 @@
 class Template < ApplicationRecord
-  has_many :forms
+  # O 'dependent: :destroy' garante que os forms associados 
+  # sejam apagados junto, permitindo a exclusão do template.
+  has_many :forms, dependent: :destroy
+  
   validates :name, presence: { message: "O nome do template é obrigatório" }
 end

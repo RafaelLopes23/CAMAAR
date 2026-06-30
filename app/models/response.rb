@@ -1,3 +1,4 @@
+# Represents a user's response to a form
 class Response < ApplicationRecord
   belongs_to :form
   belongs_to :user

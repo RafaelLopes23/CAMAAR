@@ -1,12 +1,14 @@
+# Controller responsável por gerenciar o ciclo de vida de Templates.
+# :reek:InstanceVariableAssumption
 class TemplatesController < ApplicationController
   before_action :set_template, only: %i[ show edit update destroy ]
 
-  # GET /templates or /templates.json
+  # GET /templates
   def index
     @templates = Template.all
   end
 
-  # GET /templates/1 or /templates/1.json
+  # GET /templates/1
   def show
   end
 
@@ -19,58 +21,78 @@ class TemplatesController < ApplicationController
   def edit
   end
 
-  # POST /templates or /templates.json
+  # POST /templates
   def create
     @template = Template.new(template_params)
 
-    respond_to do |format|
-      if @template.save
-        format.html { redirect_to @template, notice: "Template criado com sucesso" }
-        format.json { render :show, status: :created, location: @template }
-      else
-        format.html { render :new, status: :unprocessable_content }
-        format.json { render json: @template.errors, status: :unprocessable_content }
-      end
-    end
-  end
-
-  # PATCH/PUT /templates/1 or /templates/1.json
-  def update
-    respond_to do |format|
-      if @template.update(template_params)
-        format.html { redirect_to @template, notice: "Template atualizado com sucesso", status: :see_other }
-        format.json { render :show, status: :ok, location: @template }
-      else
-        format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @template.errors, status: :unprocessable_content }
-      end
-    end
-  end
-
-  # DELETE /templates/1 or /templates/1.json
-  def destroy
-    if @template.forms.any?
-      respond_to do |format|
-        format.html { redirect_to templates_path, alert: "Não é possível excluir um template que já possui formulários vinculados", status: :see_other }
-        format.json { render json: { error: "Template has associated forms" }, status: :unprocessable_entity }
-      end
+    if @template.save
+      render_create_success(@template)
     else
-      @template.destroy!
-      respond_to do |format|
-        format.html { redirect_to templates_path, notice: "Template excluído com sucesso", status: :see_other }
-        format.json { head :no_content }
-      end
+      render_fail(:new, @template)
     end
+  end
+
+  # PATCH/PUT /templates/1
+  def update
+    if @template.update(template_params)
+      render_update_success(@template)
+    else
+      render_fail(:edit, @template)
+    end
+  end
+
+  # DELETE /templates/1
+  def destroy
+    return render_destroy_restricted if @template.forms.any?
+
+    @template.destroy!
+    render_destroy_success
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_template
-      @template = Template.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def template_params
-      params.expect(template: [ :name, :description ])
+  def set_template
+    @template = Template.find(params.expect(:id))
+  end
+
+  def template_params
+    params.expect(template: [ :name, :description ])
+  end
+
+  # --- Métodos auxiliares otimizados ---
+
+  def render_create_success(template)
+    respond_to do |format|
+      format.html { redirect_to template, notice: "Template criado com sucesso" }
+      format.json { render :show, status: :created, location: template }
     end
+  end
+
+  def render_update_success(template)
+    respond_to do |format|
+      format.html { redirect_to template, notice: "Template atualizado com sucesso", status: :see_other }
+      format.json { render :show, status: :ok, location: template }
+    end
+  end
+
+  def render_fail(action, template)
+    respond_to do |format|
+      format.html { render action, status: :unprocessable_content }
+      format.json { render json: template.errors, status: :unprocessable_content }
+    end
+  end
+
+  def render_destroy_restricted
+    respond_to do |format|
+      format.html { redirect_to templates_path, alert: "Não é possível excluir um template que já possui formulários vinculados", status: :see_other }
+      format.json { render json: { error: "Template has associated forms" }, status: :unprocessable_entity }
+    end
+  end
+
+  def render_destroy_success
+    respond_to do |format|
+      format.html { redirect_to templates_path, notice: "Template excluído com sucesso", status: :see_other }
+      format.json { head :no_content }
+    end
+  end
 end

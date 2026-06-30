@@ -69,3 +69,7 @@ gem "csv", "~> 3.3", groups: [:test, :development]
 gem "rspec-expectations", "~> 3.13", groups: [:test, :development]
 
 gem "rspec-rails", "~> 8.0", groups: [:development, :test]
+
+group :test do
+  gem 'simplecov', require: false
+end
