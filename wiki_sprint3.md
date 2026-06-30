@@ -1,4 +1,4 @@
-# Projeto CAMAAR - Sprint 2
+# Projeto CAMAAR - Sprint 3
 
 **Grupo 3**
 
@@ -23,16 +23,8 @@ Durante esta sprint (Sprint 2), nosso foco foi a implementação técnica na cod
 - Autenticação e Login
 
 ## Divisão de Responsabilidades
-- **Rafael Lopes Cordeiro:** Responsável por implementar as seguintes funcionalidades cujo os cenários BDD foram especificados, com testes RSpec cobrindo os caminhos feliz e triste de cada feature:
-  - Criar formulário de avaliação
-  - Criar template de formulário
-  - Gerar relatório do administrador
-  - Responder formulário
-- **Rebeca de Souza Coutinho:** Responsável por implementar as seguintes funcionalidades cujo os cenários BDD foram especificados, com testes RSpec cobrindo os caminhos feliz e triste de cada feature:
-  - Edição e deleção de templates
-  - Visualização dos templates criados
-  - Visualização de formulários para responder
-  - Sistema de Login
+- **Rafael Lopes Cordeiro:** 
+- **Rebeca de Souza Coutinho:** 
 
 ## Descrição das Features BDD (Cucumber)
 As funcionalidades foram transcritas para a sintaxe Gherkin (Cucumber), abrangendo os caminhos principal e alternativo de todas as issues do MVP:
@@ -50,9 +42,22 @@ As features foram descritas e implementadas utilizando a sintaxe Gherkin (Cucumb
 - **Importação de Dados:** Valida a importação de CSVs e exibe alertas para extensões não suportadas.
 - **Definição de Senha:** Verifica tamanho mínimo de senha e ativa o cadastro do usuário.
 
-## Política de Branching
-A equipe adotou o **GitHub Flow** como estratégia de versionamento para o projeto.
-- A branch `main` sempre contém o código em estado de produção/estável.
-- Novas funcionalidades e testes são desenvolvidos em branches criadas a partir da `main` com nomes descritivos (ex: `sprint-1`, `release/sprint-2`).
+
+
+## Refatoração de código e cobertura de testes
+Nessa Etapa (Sprint 3) o objetivo foi a avaliação e melhoria da qualidade do código da aplicação. Foram utilizadas as seguintes ferramentas: 
+- **Saikuro:**
+- **RubyCritic**
+- **SimpleCov**
+- 
+-
+
+## Análise de complexidade ciclomática com Saikuro
+
+## Análise com RubyCritic
+
+## Cobertura de testes com SimpleCov
+
+#Novas funcionalidades e testes são desenvolvidos em branches criadas a partir da `main` com nomes descritivos (ex: `sprint-1`, `release/sprint-2`).
 - Uma vez que o trabalho na branch está concluído, é aberto um **Pull Request** para a branch principal (`main`).
 - Após revisão e aprovação, a branch do Pull Request é integrada e feito o merge na `main`.
